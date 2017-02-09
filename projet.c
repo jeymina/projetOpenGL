@@ -67,7 +67,7 @@ void my_timer(int v){
 void display(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClear (GL_COLOR_BUFFER_BIT);
-	
+
 	glPushMatrix();
 
 	draw_Centre(); // Centre de la fenetre
@@ -85,7 +85,9 @@ void display(void){
 	//glRotatef(Zrotation, 0, 0, 1);
 
 
-	drawPlateau();
+	//drawPlateau();
+
+	draw_Piece(1);
 
 	glPopMatrix();
 
@@ -93,7 +95,7 @@ void display(void){
 }
 
 void reshape (int w, int h){
-	glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
+	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Pour le mode filaire
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
@@ -105,14 +107,14 @@ int main(int argc, char** argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode (GLUT_DOUBLE|GLUT_RGB|GLUT_DEPTH);
 
-	glutInitWindowSize (500, 500); 
+	glutInitWindowSize (500, 500);
 	glutInitWindowPosition (100, 100);
 	glutCreateWindow (argv[0]);
 	init ();
 
 	glEnable(GL_DEPTH_TEST);
 
-	glutDisplayFunc(display); 
+	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc (keyboardSpecial);

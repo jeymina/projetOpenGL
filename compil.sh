@@ -1,1 +1,1 @@
-gcc $1.c -lGL -lglut -lGLU -o $1 -lm
+gcc -Wall $1.c -o $1 -lGL -lglut -lGLU -lm
