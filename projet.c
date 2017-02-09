@@ -1,4 +1,3 @@
-#include <GL/glut.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "projet_Draw.h"
