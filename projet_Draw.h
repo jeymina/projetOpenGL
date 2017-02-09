@@ -149,7 +149,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (0, 0, 0);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (1.0, 0.0, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f (0, 1, 0);
     glVertex3f (1, 1, 0);
@@ -157,7 +157,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (0, 1, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (1.0, 0.0, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 1, 1);
     glVertex3f (0, 1, 1);
@@ -165,7 +165,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 0, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (1.0, 0.0, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 0, 1);
     glVertex3f (0, 0, 1);
@@ -173,7 +173,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 0, 0);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (1.0, 0.0, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 1, 0);
     glVertex3f (1, 0, 0);
@@ -181,7 +181,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 1, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (1.0, 0.0, 0.0);
     glBegin(GL_POLYGON);
     glVertex3f (0, 1, 0);
     glVertex3f (0, 1, 1);
@@ -192,7 +192,7 @@ void draw_Piece(int noJoueur){
 
   }else if(noJoueur == 0){
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (0, 1, 0);
     glVertex3f (1, 1, 0);
@@ -200,7 +200,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (0, 0, 0);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+  glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (0, 1, 0);
     glVertex3f (1, 1, 0);
@@ -208,7 +208,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (0, 1, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 1, 1);
     glVertex3f (0, 1, 1);
@@ -216,7 +216,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 0, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 0, 1);
     glVertex3f (0, 0, 1);
@@ -224,7 +224,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 0, 0);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (1, 1, 0);
     glVertex3f (1, 0, 0);
@@ -232,7 +232,7 @@ void draw_Piece(int noJoueur){
     glVertex3f (1, 1, 1);
     glEnd();
 
-    glColor3f (1.0, 1.0, 1.0);
+    glColor3f (0.0, 0.0, 1.0);
     glBegin(GL_POLYGON);
     glVertex3f (0, 1, 0);
     glVertex3f (0, 1, 1);
