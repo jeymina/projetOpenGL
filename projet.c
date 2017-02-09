@@ -7,14 +7,31 @@ float Xrotation = 0.0;
 float Yrotation = 0.0;
 float Zrotation = 0.0;
 
+int turn = 0;
+
 void keyboard(unsigned char key, int x, int y){
 	switch (key) {
-		case 27:
-			exit(0);
-			break;
+	case 27:
+		exit(0);
+		break;
+	default : break;
 	}
 	glutPostRedisplay();
 }
+
+void keyboardSpecial(int key, int x, int y){
+	switch (key) {
+	case GLUT_KEY_LEFT :
+		turn = 1;
+		break;
+	case GLUT_KEY_RIGHT :
+		turn = 2;
+		break;
+	default : break;	
+	}
+	glutPostRedisplay();
+}
+
 
 void init(void) {
 	glClearColor (229.0/255.0, 220.0/255.0, 193.0/255.0, 0.0);
@@ -27,9 +44,22 @@ void init(void) {
 }
 
 void my_timer(int v){
-	Xrotation += 0.5;
-	Yrotation += 0.5;
-	Zrotation += 0.5;
+
+	switch (turn) {
+	case 1 :
+		Zrotation += 0.5;
+		break;
+	case 2 :
+		Zrotation -= 0.5;
+		break;
+	default : break;
+	}
+
+	if (Zrotation < -90.0 || Zrotation > 90.0 || Zrotation == 0.0) {
+		Zrotation = 0.0;
+		turn = 0;
+	}
+	
 	glutTimerFunc(10, my_timer, 1);
 	glutPostRedisplay();
 }
@@ -47,11 +77,12 @@ void display(void){
 	glRotatef(100,1,0,0);
 	glRotatef(10,0,0,1);
 
+	glRotatef(Zrotation, 0, 0, 1);
 
 	// Rotation du plateau
 	//glRotatef(Xrotation, 1, 0, 0);
 	//glRotatef(Yrotation, 0, 1, 0);
-	glRotatef(Zrotation, 0, 0, 1);
+	//glRotatef(Zrotation, 0, 0, 1);
 
 
 	drawPlateau();
@@ -84,6 +115,7 @@ int main(int argc, char** argv){
 	glutDisplayFunc(display); 
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc (keyboardSpecial);
 	glutTimerFunc(40, my_timer, 1);
 
 
