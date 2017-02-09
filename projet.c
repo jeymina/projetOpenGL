@@ -3,10 +3,7 @@
 #include <stdio.h>
 #include "projet_Draw.h"
 
-float Xrotation = 0.0;
-float Yrotation = 0.0;
-float Zrotation = 0.0;
-
+int Zrotation = 0;
 int turn = 0;
 
 void keyboard(unsigned char key, int x, int y){
@@ -47,16 +44,15 @@ void my_timer(int v){
 
 	switch (turn) {
 	case 1 :
-		Zrotation += 0.5;
+		Zrotation += 1;
 		break;
 	case 2 :
-		Zrotation -= 0.5;
+		Zrotation -= 1;
 		break;
 	default : break;
 	}
 
-	if (Zrotation < -90.0 || Zrotation > 90.0 || Zrotation == 0.0) {
-		Zrotation = 0.0;
+	if (Zrotation % 90 == 0) {
 		turn = 0;
 	}
 	
@@ -85,9 +81,9 @@ void display(void){
 	//glRotatef(Zrotation, 0, 0, 1);
 
 
-	//drawPlateau();
+	drawPlateau();
 
-	draw_Piece(1);
+	//draw_Piece(1);
 
 	glPopMatrix();
 
