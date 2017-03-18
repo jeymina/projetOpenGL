@@ -1,5 +1,7 @@
 #include <math.h>
+#include <GL/glut.h>
 #include "projet_Draw.h"
+#include "projet_Util.h"
 
 #define NBPTS 25
 
@@ -21,10 +23,10 @@ void draw_Centre(){
   glScalef(0.1,0.1,0.1);
   glColor3f (1,0,0);
   glBegin(GL_QUADS);
-  glVertex3f(0,0,0);
-  glVertex3f(1,0,0);
-  glVertex3f(1,1,0);
-  glVertex3f(0,1,0);
+    glVertex3f(0,0,0);
+    glVertex3f(1,0,0);
+    glVertex3f(1,1,0);
+    glVertex3f(0,1,0);
   glEnd();
   glPopMatrix();
 }
@@ -34,43 +36,43 @@ void draw_Socle(){
 
   glColor3f (239.0/255.0, 202.0/255.0, 141.0/255.0);
   glBegin(GL_QUADS);
-  glVertex3f(0,0,0);
-  glVertex3f(8,0,0);
-  glVertex3f(8,8,0);
-  glVertex3f(0,8,0);
+    glVertex3f(0,0,0);
+    glVertex3f(8,0,0);
+    glVertex3f(8,8,0);
+    glVertex3f(0,8,0);
   glEnd();
   glBegin(GL_QUADS);
-  glVertex3f(0,0,1);
-  glVertex3f(8,0,1);
-  glVertex3f(8,8,1);
-  glVertex3f(0,8,1);
+    glVertex3f(0,0,1);
+    glVertex3f(8,0,1);
+    glVertex3f(8,8,1);
+    glVertex3f(0,8,1);
   glEnd();
 
 
   glColor3f (206.0/255.0, 170.0/255.0, 113.0/255.0);
   glBegin(GL_QUADS);
-  glVertex3f(0,0,0);
-  glVertex3f(8,0,0);
-  glVertex3f(8,0,1);
-  glVertex3f(0,0,1);
+    glVertex3f(0,0,0);
+    glVertex3f(8,0,0);
+    glVertex3f(8,0,1);
+    glVertex3f(0,0,1);
   glEnd();
   glBegin(GL_QUADS);
-  glVertex3f(8,0,0);
-  glVertex3f(8,8,0);
-  glVertex3f(8,8,1);
-  glVertex3f(8,0,1);
+    glVertex3f(8,0,0);
+    glVertex3f(8,8,0);
+    glVertex3f(8,8,1);
+    glVertex3f(8,0,1);
   glEnd();
   glBegin(GL_QUADS);
-  glVertex3f(8,8,0);
-  glVertex3f(0,8,0);
-  glVertex3f(0,8,1);
-  glVertex3f(8,8,1);
+    glVertex3f(8,8,0);
+    glVertex3f(0,8,0);
+    glVertex3f(0,8,1);
+    glVertex3f(8,8,1);
   glEnd();
   glBegin(GL_QUADS);
-  glVertex3f(0,8,0);
-  glVertex3f(0,0,0);
-  glVertex3f(0,0,1);
-  glVertex3f(0,8,1);
+    glVertex3f(0,8,0);
+    glVertex3f(0,0,0);
+    glVertex3f(0,0,1);
+    glVertex3f(0,8,1);
   glEnd();
 
   glPopMatrix();
@@ -78,6 +80,7 @@ void draw_Socle(){
 
 void draw_Barre(){
   glPushMatrix();
+
   int i;
 
   // Face Haute
@@ -118,7 +121,7 @@ void drawPlateau(){
 
   glPushMatrix();
   glTranslatef(-3.0,-3.0,0.0);
-  int i,j;
+  int i,j,k;
   for (i=0 ; i<4 ; i++){
     for (j=0 ; j<4 ; j++){
       glPushMatrix();
@@ -126,6 +129,15 @@ void drawPlateau(){
       glScalef(0.2,0.2,2);
       draw_Barre();
       glPopMatrix();
+
+      glPushMatrix();
+      glScalef(0.8,0.8,0.8);
+      for (k=0; k<4; k++){
+        glTranslatef(0.0,0.0,-1.1);
+        draw_Piece(tabPion[i][j][k]);
+      }
+      glPopMatrix ();
+
       glTranslatef(2.0,0.0,0.0);
     }
     glTranslatef(-8.0,2.0,0.0);
@@ -136,112 +148,64 @@ void drawPlateau(){
 }
 
 void draw_Piece(int noJoueur){
+  if (noJoueur == 0){
+    // On ne dessine rien
+    return;
+  }
+
   //if 0 = bleu
   //if 1 = rouge
+  glPushMatrix();
+  glTranslatef(-0.5,-0.5,0);
 
   if(noJoueur == 1){
-    glPushMatrix();
-    glTranslatef(0,2,0);
     glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 0, 0);
-    glVertex3f (0, 0, 0);
-    glEnd();
-
-    glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 1, 1);
-    glVertex3f (0, 1, 1);
-    glEnd();
-
-    glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 1, 1);
-    glVertex3f (0, 1, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (1, 0, 1);
-    glEnd();
-
-    glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 0, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (0, 0, 0);
-    glVertex3f (1, 0, 0);
-    glEnd();
-
-    glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 0, 0);
-    glVertex3f (1, 0, 1);
-    glVertex3f (1, 1, 1);
-    glEnd();
-
-    glColor3f (1.0, 0.0, 0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (0, 1, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (0, 0, 0);
-    glEnd();
-    glPopMatrix();
-
-  }else if(noJoueur == 0){
-
+  }else if(noJoueur == 2){
     glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 0, 0);
-    glVertex3f (0, 0, 0);
-    glEnd();
-
-  glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 1, 1);
-    glVertex3f (0, 1, 1);
-    glEnd();
-
-    glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 1, 1);
-    glVertex3f (0, 1, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (1, 0, 1);
-    glEnd();
-
-    glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 0, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (0, 0, 0);
-    glVertex3f (1, 0, 0);
-    glEnd();
-
-    glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (1, 1, 0);
-    glVertex3f (1, 0, 0);
-    glVertex3f (1, 0, 1);
-    glVertex3f (1, 1, 1);
-    glEnd();
-
-    glColor3f (0.0, 0.0, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0, 1, 0);
-    glVertex3f (0, 1, 1);
-    glVertex3f (0, 0, 1);
-    glVertex3f (0, 0, 0);
-    glEnd();
-
-
   }
+
+  glBegin(GL_POLYGON);
+    glVertex3f (0, 1, 0);
+    glVertex3f (1, 1, 0);
+    glVertex3f (1, 0, 0);
+    glVertex3f (0, 0, 0);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glVertex3f (0, 1, 0);
+    glVertex3f (1, 1, 0);
+    glVertex3f (1, 1, 1);
+    glVertex3f (0, 1, 1);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glVertex3f (1, 1, 1);
+    glVertex3f (0, 1, 1);
+    glVertex3f (0, 0, 1);
+    glVertex3f (1, 0, 1);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glVertex3f (1, 0, 1);
+    glVertex3f (0, 0, 1);
+    glVertex3f (0, 0, 0);
+    glVertex3f (1, 0, 0);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glVertex3f (1, 1, 0);
+    glVertex3f (1, 0, 0);
+    glVertex3f (1, 0, 1);
+    glVertex3f (1, 1, 1);
+  glEnd();
+
+  glBegin(GL_POLYGON);
+    glVertex3f (0, 1, 0);
+    glVertex3f (0, 1, 1);
+    glVertex3f (0, 0, 1);
+    glVertex3f (0, 0, 0);
+  glEnd();
+
+  glPopMatrix();
 
 }

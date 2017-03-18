@@ -1,5 +1,3 @@
-#include <GL/glut.h>
-
 void draw_init();
 
 void draw_Centre();
