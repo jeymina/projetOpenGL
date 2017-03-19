@@ -14,6 +14,11 @@ int upDown = 0;
 int facing = 0; // De 0 a 3
 int goFace = -1;
 
+GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 0 };
+GLfloat light_diffuse[] = { 0.9, 0.9, 0.9, 0 };
+GLfloat light_specular[] = { .9, .9,.9, 0 };
+GLfloat light_position[] = { -5.0, -5.0, 5.0, 1.0 };
+GLfloat general_light_ambient[] = { 0.8, 0.8, 0.8, 1.0 };
 
 void keyboard(unsigned char key, int x, int y){
 
@@ -137,6 +142,7 @@ void keyboardSpecial(int key, int x, int y){
 
 void init(void) {
 	glClearColor (229.0/255.0, 220.0/255.0, 193.0/255.0, 0.0);
+
 	glClear (GL_COLOR_BUFFER_BIT);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity ();
@@ -351,10 +357,22 @@ void my_timer(int v){
 void display(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClear (GL_COLOR_BUFFER_BIT);
+	glEnable (GL_DEPTH_TEST);
+	glEnable(GL_NORMALIZE);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_LIGHTING);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, general_light_ambient);
+	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHT0);
 
 	glPushMatrix();
 
-	draw_Centre(); // Centre de la fenetre
+	//draw_Centre(); // Centre de la fenetre
 
 
 
@@ -377,7 +395,8 @@ void reshape (int w, int h){
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Pour le mode filaire
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
-	gluPerspective(120,w/h,0.1,20);
+
+    gluPerspective(120,w/h,0.1,20);
 	glMatrixMode (GL_MODELVIEW);
 }
 
@@ -389,8 +408,6 @@ int main(int argc, char** argv){
 	glutInitWindowPosition (100, 100);
 	glutCreateWindow (argv[0]);
 	init ();
-
-	glEnable(GL_DEPTH_TEST);
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);

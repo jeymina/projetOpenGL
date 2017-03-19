@@ -3,6 +3,12 @@
 int player = 0;
 int gameFinished = 0;
 
+int switchPlayer(){
+	if (player == 1) player = 2;
+	else player = 1;
+	return player;
+}
+
 void util_init(){
   int i,j,k;
   for(i=0 ; i<4 ; i++){
@@ -14,11 +20,6 @@ void util_init(){
   }
 }
 
-int switchPlayer(){
-	if (player == 1) player = 2;
-	else player = 1;
-	return player;
-}
 
 int testIsWinner(int x, int y, int z){
 	// Test ligne
