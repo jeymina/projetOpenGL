@@ -25,89 +25,42 @@ void keyboard(unsigned char key, int x, int y){
 	switch (key) {
 	case 27: exit(0); break;
 	case 'p': restartGame(); break;
+	case 32: drawAtPos(xBarre, yBarre); break;
 	default :
 		switch(facing){
 		case 0 :
 			switch (key) {
-			case '1': drawAtPos(0,0); break;
-			case '2': drawAtPos(0,1); break;
-			case '3': drawAtPos(0,2); break;
-			case '4': drawAtPos(0,3); break;
-			case 'A': drawAtPos(1,0); break;
-			case 'Z': drawAtPos(1,1); break;
-			case 'E': drawAtPos(1,2); break;
-			case 'R': drawAtPos(1,3); break;
-			case 'Q': drawAtPos(2,0); break;
-			case 'S': drawAtPos(2,1); break;
-			case 'D': drawAtPos(2,2); break;
-			case 'F': drawAtPos(2,3); break;
-			case 'W': drawAtPos(3,0); break;
-			case 'X': drawAtPos(3,1); break;
-			case 'C': drawAtPos(3,2); break;
-			case 'V': drawAtPos(3,3); break;
+			case 'z': if (xBarre > 0) xBarre--; break;
+			case 'q': if (yBarre > 0) yBarre--; break;
+			case 's': if (xBarre < 3) xBarre++; break;
+			case 'd': if (yBarre < 3) yBarre++; break;
 			default : break;
 			}
 			break;
 		case 1 :
 			switch (key) {
-			case '1': drawAtPos(3,0); break;
-			case '2': drawAtPos(2,0); break;
-			case '3': drawAtPos(1,0); break;
-			case '4': drawAtPos(0,0); break;
-			case 'A': drawAtPos(3,1); break;
-			case 'Z': drawAtPos(2,1); break;
-			case 'E': drawAtPos(1,1); break;
-			case 'R': drawAtPos(0,1); break;
-			case 'Q': drawAtPos(3,2); break;
-			case 'S': drawAtPos(2,2); break;
-			case 'D': drawAtPos(1,2); break;
-			case 'F': drawAtPos(0,2); break;
-			case 'W': drawAtPos(3,3); break;
-			case 'X': drawAtPos(2,3); break;
-			case 'C': drawAtPos(1,3); break;
-			case 'V': drawAtPos(0,3); break;
+			case 'z': if (yBarre > 0) yBarre--; break;
+			case 'q': if (xBarre < 3) xBarre++; break;
+			case 's': if (yBarre < 3) yBarre++; break;
+			case 'd': if (xBarre > 0) xBarre--; break;
 			default : break;
 			}
 			break;
 		case 2 :
 			switch (key) {
-			case '1': drawAtPos(3,3); break;
-			case '2': drawAtPos(3,2); break;
-			case '3': drawAtPos(3,1); break;
-			case '4': drawAtPos(3,0); break;
-			case 'A': drawAtPos(2,3); break;
-			case 'Z': drawAtPos(2,2); break;
-			case 'E': drawAtPos(2,1); break;
-			case 'R': drawAtPos(2,0); break;
-			case 'Q': drawAtPos(1,3); break;
-			case 'S': drawAtPos(1,2); break;
-			case 'D': drawAtPos(1,1); break;
-			case 'F': drawAtPos(1,0); break;
-			case 'W': drawAtPos(0,3); break;
-			case 'X': drawAtPos(0,2); break;
-			case 'C': drawAtPos(0,1); break;
-			case 'V': drawAtPos(0,0); break;
+			case 'z': if (xBarre < 3) xBarre++; break;
+			case 'q': if (yBarre < 3) yBarre++; break;
+			case 's': if (xBarre > 0) xBarre--; break;
+			case 'd': if (yBarre > 0) yBarre--; break;
 			default : break;
 			}
 			break;
 		case 3 :
 			switch (key) {
-			case '1': drawAtPos(0,3); break;
-			case '2': drawAtPos(1,3); break;
-			case '3': drawAtPos(2,3); break;
-			case '4': drawAtPos(3,3); break;
-			case 'A': drawAtPos(0,2); break;
-			case 'Z': drawAtPos(1,2); break;
-			case 'E': drawAtPos(2,2); break;
-			case 'R': drawAtPos(3,2); break;
-			case 'Q': drawAtPos(0,1); break;
-			case 'S': drawAtPos(1,1); break;
-			case 'D': drawAtPos(2,1); break;
-			case 'F': drawAtPos(3,1); break;
-			case 'W': drawAtPos(0,0); break;
-			case 'X': drawAtPos(1,0); break;
-			case 'C': drawAtPos(2,0); break;
-			case 'V': drawAtPos(3,0); break;
+			case 'z': if (yBarre < 3) yBarre++; break;
+			case 'q': if (xBarre > 0) xBarre--; break;
+			case 's': if (yBarre > 0) yBarre--; break;
+			case 'd': if (xBarre < 3) xBarre++; break;
 			default : break;
 			}
 			break;
@@ -138,7 +91,6 @@ void keyboardSpecial(int key, int x, int y){
 	}
 	glutPostRedisplay();
 }
-
 
 void init(void) {
 	glClearColor (229.0/255.0, 220.0/255.0, 193.0/255.0, 0.0);
@@ -353,13 +305,39 @@ void my_timer(int v){
 	glutPostRedisplay();
 }
 
+void text(){
+	if (player == 1){
+		glColor3f(1, 0, 0);
+	} else {
+		glColor3f(0, 0, 1);
+	}
+	glWindowPos2i(10, 460);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, chaine);
+
+	glColor3f(0, 0, 0);
+	glWindowPos2i(10, 60);
+	char * commande = "'ZQSD'  : Choix Tige\nFleches : Camera\n'P'         : Recommencer\nEchap   : Quitter";
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, commande);
+
+	glColor3f(1, 0, 0);
+	glWindowPos2i(380, 50);
+	char str[80];
+    sprintf(str, "Joueur 1 : %d", scoreJ1);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, str);
+
+	glColor3f(0, 0, 1);
+	glWindowPos2i(380, 20);
+	char str2[80];
+    sprintf(str2, "Joueur 2 : %d", scoreJ2);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, str2);
+	glutSwapBuffers();
+}
 
 void display(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glClear (GL_COLOR_BUFFER_BIT);
 	glEnable (GL_DEPTH_TEST);
 	glEnable(GL_NORMALIZE);
-	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, general_light_ambient);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
@@ -374,8 +352,6 @@ void display(void){
 
 	//draw_Centre(); // Centre de la fenetre
 
-
-
 	glTranslatef(0.0,-1.0,-3.0);
 	glRotatef(100,1,0,0);
 	glRotatef(10,0,0,1);
@@ -387,12 +363,17 @@ void display(void){
 
 	drawPlateau();
 	glPopMatrix();
-	glutSwapBuffers();
+	
+	// TEXT Field !/////////////
+	glDisable(GL_NORMALIZE);
+	glDisable(GL_LIGHTING);
+
+	text();
 }
 
 void reshape (int w, int h){
 	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Pour le mode filaire
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Pour le mode filaire
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
 
